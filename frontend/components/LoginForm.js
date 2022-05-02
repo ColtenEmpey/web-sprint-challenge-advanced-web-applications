@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import PT from 'prop-types'
 
+
 const initialFormValues = {
   username: '',
   password: '',
 }
 export default function LoginForm(props) {
   const [values, setValues] = useState(initialFormValues)
+  // console.log(props)
+  const {login} = props
   // ✨ where are my props? Destructure them here
 
   const onChange = evt => {
@@ -16,14 +19,16 @@ export default function LoginForm(props) {
 
   const onSubmit = evt => {
     evt.preventDefault()
+    login(values)
     // ✨ implement
   }
 
   const isDisabled = () => {
     // ✨ implement
-    // Trimmed username must be >= 3, and
-    // trimmed password must be >= 8 for
-    // the button to become enabled
+    if( values.username.trim().length >2 && values.password.trim().length >7 ){
+      return false
+    }
+    else return true
   }
 
   return (
